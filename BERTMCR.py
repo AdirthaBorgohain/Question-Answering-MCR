@@ -40,6 +40,10 @@ class BERTMCR:
 
                 answer = self.__tokenizer.convert_tokens_to_string(
                     self.__tokenizer.convert_ids_to_tokens(input_ids[answer_start:answer_end]))
+
+                #remove special tokens
+                answer = [word.replace("▁","") if word.startswith("▁") else word for word in answer]
+                answer = " ".join(answer).replace("[CLS]","").replace("[SEP]","").replace(" ##","")
                 res['extracted_answer'] = answer.capitalize()
             else:
                 res['extracted_answer'] = ""
