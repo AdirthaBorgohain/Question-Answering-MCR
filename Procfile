@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run BERTMCR.py
+web: sh setup.sh && streamlit run smallBERTMCR.py

@@ -5,9 +5,9 @@ from typing import List, Dict
 from transformers import AutoTokenizer, AutoModelForQuestionAnswering
 
 
-class BERTMCR:
+class smallBERTMCR:
     def __init__(self, naq_threshold: float = 2.0):
-        self.__bert_model = "bert-large-uncased-whole-word-masking-finetuned-squad"
+        self.__bert_model = "mrm8488/bert-small-finetuned-squadv2"
         self.__tokenizer = AutoTokenizer.from_pretrained(self.__bert_model)
         self.__model = AutoModelForQuestionAnswering.from_pretrained(self.__bert_model)
         self.__naq_threshold = naq_threshold
@@ -47,14 +47,14 @@ class BERTMCR:
         res_dict['answers'] = answers
         return res_dict
 
-@st.cache(hash_funcs={BERTMCR: lambda _: None}, allow_output_mutation=True)
+@st.cache(hash_funcs={smallBERTMCR: lambda _: None}, allow_output_mutation=True)
 def load_model():
-    return BERTMCR()
+    return smallBERTMCR()
 
 MCR = load_model()
 
 st.title("Machine Comprehension Reading Model")
-st.write("A model to get answers from questions given a context. Powered by Google's BERT Algorithm.")
+st.write("A model to get answers from questions given a context. Powered by a small model of BERT.")
 
 with st.form(key='input_form'):
     context = st.text_area('Context', height=300, help="Enter context here...")
@@ -69,3 +69,4 @@ with st.form(key='input_form'):
             st.write(res['answers'][0]['extracted_answer'])
         else:
             st.write('Could not answer question.')
+            #    st.write(f"Answer: {res['answers'][0]['extracted_answer']}")
