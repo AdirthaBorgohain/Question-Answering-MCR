@@ -5,6 +5,7 @@ echo "\
 headless = true\n\
 port = $PORT\n\
 enableWebsocketCompression = false\n\
+enableXsrfProtection = false\n\
 enableCORS = false\n\
 \n\
 " > ~/.streamlit/config.toml
