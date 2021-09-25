@@ -43,7 +43,7 @@ class smallBERTMCR:
                     
                 #remove special tokens
                 answer = [word.replace("▁","") if word.startswith("▁") else word for word in answer]
-                answer = " ".join(answer).replace("[CLS]","").replace("[SEP]","").replace(" ##","")
+                answer = "".join(answer).replace("[CLS]","").replace("[SEP]","").replace(" ##","")
                 res['extracted_answer'] = answer.capitalize()
             else:
                 res['extracted_answer'] = ""
